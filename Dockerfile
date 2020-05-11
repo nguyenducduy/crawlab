@@ -40,7 +40,7 @@ RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/
 RUN chmod +x /usr/local/bin/dumb-init
 
 # install backend
-RUN pip install scrapy pymongo bs4 requests crawlab-sdk scrapy-splash
+RUN pip install scrapy pymongo bs4 requests crawlab-sdk scrapy-splash nltk
 
 # add files
 ADD . /app
@@ -60,7 +60,7 @@ COPY ./nginx/crawlab.conf /etc/nginx/conf.d
 WORKDIR /app/backend
 
 # timezone environment
-ENV TZ Asia/Shanghai
+ENV TZ Asia/Ho_Chi_Minh
 
 # language environment
 ENV LC_ALL C.UTF-8
