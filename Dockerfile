@@ -29,8 +29,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV CRAWLAB_IS_DOCKER Y
 
 # install packages
-RUN chmod 777 /tmp \
-	&& apt-get update \
+RUN apt-get update \
 	&& apt-get install -y curl git net-tools iputils-ping ntp ntpdate python3 python3-pip nginx wget \
 	&& ln -s /usr/bin/pip3 /usr/local/bin/pip \
 	&& ln -s /usr/bin/python3 /usr/local/bin/python
@@ -52,9 +51,7 @@ RUN cp /opt/bin/crawlab /usr/local/bin/crawlab-server
 
 # copy frontend files
 COPY --from=frontend-build /app/dist /app/dist
-
-# copy nginx config files
-COPY ./nginx/crawlab.conf /etc/nginx/conf.d
+COPY --from=frontend-build /app/conf/crawlab.conf /etc/nginx/conf.d
 
 # working directory
 WORKDIR /app/backend
