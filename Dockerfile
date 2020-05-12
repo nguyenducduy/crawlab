@@ -8,7 +8,7 @@ ENV GOPROXY https://goproxy.io
 
 RUN go install -v ./...
 
-FROM node:10.20.1-alpine AS frontend-build
+FROM node:10-alpine AS frontend-build
 
 ADD ./frontend /app
 WORKDIR /app
