@@ -1,7 +1,7 @@
 <template>
   <el-scrollbar wrap-class="scrollbar-wrapper">
     <div class="sidebar-logo" :class="isCollapse ? 'collapsed' : ''">
-      <span>Corpus-VN</span>
+      <span>OLLI crawler</span>
     </div>
     <el-menu
       :show-timeout="200"
@@ -77,7 +77,7 @@ export default {
   padding-left: 20px;
   color: #fff;
   background: rgb(48, 65, 86);
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 600;
   font-family: "Verdana", serif;
 }
