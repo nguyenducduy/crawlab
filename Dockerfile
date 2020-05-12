@@ -14,6 +14,7 @@ ADD ./frontend /app
 WORKDIR /app
 
 # install frontend
+RUN rm -rf /usr/local/bin/yarn
 RUN npm config set unsafe-perm true
 RUN npm install -g yarn && yarn install
 

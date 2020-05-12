@@ -1,77 +1,77 @@
-import Vue from "vue";
+import Vue from 'vue'
 
-import "normalize.css/normalize.css"; // A modern alternative to CSS resets
+import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
-import ElementUI from "element-ui";
-import "element-ui/lib/theme-chalk/index.css";
-import locale from "element-ui/lib/locale/lang/en"; // lang i18n
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 
-import "@/styles/index.scss"; // global css
+import '@/styles/index.scss' // global css
 
-import "font-awesome/scss/font-awesome.scss"; // FontAwesome
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fab } from "@fortawesome/free-brands-svg-icons";
-import { fas } from "@fortawesome/free-solid-svg-icons";
-import { far } from "@fortawesome/free-regular-svg-icons";
+import 'font-awesome/scss/font-awesome.scss' // FontAwesome
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { far } from '@fortawesome/free-regular-svg-icons'
 import {
   FontAwesomeIcon,
   FontAwesomeLayers,
   FontAwesomeLayersText
-} from "@fortawesome/vue-fontawesome";
+} from '@fortawesome/vue-fontawesome'
 
-import "codemirror/lib/codemirror.js";
-import { codemirror } from "vue-codemirror-lite";
-import "codemirror/lib/codemirror.css";
-import "codemirror/theme/darcula.css";
+import 'codemirror/lib/codemirror.js'
+import { codemirror } from 'vue-codemirror-lite'
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/theme/darcula.css'
 
-import App from "./App";
-import store from "./store";
-import router from "./router";
+import App from './App'
+import store from './store'
+import router from './router'
 
-import "@/icons"; // icon
-import "@/permission"; // permission control
+import '@/icons' // icon
+import '@/permission' // permission control
 
-import request from "./api/request";
-import i18n from "./i18n";
-import utils from "./utils";
+import request from './api/request'
+import i18n from './i18n'
+import utils from './utils'
 
 // vue-tour
-import VueTour from "vue-tour";
-import "vue-tour/dist/vue-tour.css";
+import VueTour from 'vue-tour'
+import 'vue-tour/dist/vue-tour.css'
 
 // code mirror
-Vue.use(codemirror);
+Vue.use(codemirror)
 
 // element-ui
-Vue.use(ElementUI, { locale });
+Vue.use(ElementUI, { locale })
 
 // font-awesome
-library.add(fab);
-library.add(far);
-library.add(fas);
-Vue.component("font-awesome-icon", FontAwesomeIcon);
-Vue.component("font-awesome-layers", FontAwesomeLayers);
-Vue.component("font-awesome-layers-text", FontAwesomeLayersText);
+library.add(fab)
+library.add(far)
+library.add(fas)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('font-awesome-layers', FontAwesomeLayers)
+Vue.component('font-awesome-layers-text', FontAwesomeLayersText)
 
 // vue-tour
-Vue.use(VueTour);
+Vue.use(VueTour)
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = false
 
 // inject request api
-Vue.prototype.$request = request;
+Vue.prototype.$request = request
 
 // inject utils
-Vue.prototype.$utils = utils;
+Vue.prototype.$utils = utils
 
 // inject stats
-Vue.prototype.$st = utils.stats;
+Vue.prototype.$st = utils.stats
 
 const app = new Vue({
-  el: "#app",
+  el: '#app',
   i18n,
   router,
   store,
   render: h => h(App)
-});
-export default app;
+})
+export default app

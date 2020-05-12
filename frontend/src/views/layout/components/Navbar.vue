@@ -63,12 +63,12 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
-import Breadcrumb from "@/components/Breadcrumb";
-import Hamburger from "@/components/Hamburger";
-import GithubButton from "vue-github-button";
-import showdown from "showdown";
-import "github-markdown-css/github-markdown.css";
+import { mapState, mapGetters } from 'vuex'
+import Breadcrumb from '@/components/Breadcrumb'
+import Hamburger from '@/components/Hamburger'
+import GithubButton from 'vue-github-button'
+import showdown from 'showdown'
+import 'github-markdown-css/github-markdown.css'
 
 export default {
   components: {
@@ -76,12 +76,12 @@ export default {
     Hamburger,
     GithubButton
   },
-  data() {
-    const converter = new showdown.Converter();
+  data () {
+    const converter = new showdown.Converter()
     return {
       isLatestReleaseNoteVisible: false,
       converter,
-      activeTabName: "release-note",
+      activeTabName: 'release-note',
       howToUpgradeHtmlZh: `
 ### Docker 部署
 \`\`\`bash
@@ -119,74 +119,73 @@ docker-compose up -d
 2. Build frontend and backend applications
 3. Start frontend and backend applications
 `
-    };
+    }
   },
   computed: {
-    ...mapState("version", ["latestRelease"]),
-    ...mapState("lang", ["lang"]),
-    ...mapGetters(["sidebar", "avatar"]),
-    username() {
-      if (!this.$store.getters["user/userInfo"]) return this.$t("User");
-      if (!this.$store.getters["user/userInfo"].username)
-        return this.$t("User");
-      return this.$store.getters["user/userInfo"].username;
+    ...mapState('version', ['latestRelease']),
+    ...mapState('lang', ['lang']),
+    ...mapGetters(['sidebar', 'avatar']),
+    username () {
+      if (!this.$store.getters['user/userInfo']) return this.$t('User')
+      if (!this.$store.getters['user/userInfo'].username) { return this.$t('User') }
+      return this.$store.getters['user/userInfo'].username
     },
-    isUpgradable() {
-      if (!this.latestRelease.name) return false;
+    isUpgradable () {
+      if (!this.latestRelease.name) return false
 
-      const currentVersion = sessionStorage.getItem("v");
-      const latestVersion = this.latestRelease.name.replace("v", "");
+      const currentVersion = sessionStorage.getItem('v')
+      const latestVersion = this.latestRelease.name.replace('v', '')
 
-      if (!latestVersion || !currentVersion) return false;
+      if (!latestVersion || !currentVersion) return false
 
-      const currentVersionList = currentVersion.split(".");
-      const latestVersionList = latestVersion.split(".");
+      const currentVersionList = currentVersion.split('.')
+      const latestVersionList = latestVersion.split('.')
       for (let i = 0; i < currentVersionList.length; i++) {
-        let nc = Number(currentVersionList[i]);
-        let nl = Number(latestVersionList[i]);
-        if (isNaN(nl)) nl = 0;
-        if (nc < nl) return true;
+        let nc = Number(currentVersionList[i])
+        let nl = Number(latestVersionList[i])
+        if (isNaN(nl)) nl = 0
+        if (nc < nl) return true
       }
-      return false;
+      return false
     },
-    latestReleaseNoteHtml() {
-      if (!this.latestRelease.body) return "";
-      const body = this.latestRelease.body;
-      return this.converter.makeHtml(body);
+    latestReleaseNoteHtml () {
+      if (!this.latestRelease.body) return ''
+      const body = this.latestRelease.body
+      return this.converter.makeHtml(body)
     },
-    howToUpgradeHtml() {
-      if (this.lang === "zh") {
-        return this.converter.makeHtml(this.howToUpgradeHtmlZh);
-      } else if (this.lang === "en") {
-        return this.converter.makeHtml(this.howToUpgradeHtmlEn);
+    howToUpgradeHtml () {
+      if (this.lang === 'zh') {
+        return this.converter.makeHtml(this.howToUpgradeHtmlZh)
+      } else if (this.lang === 'en') {
+        return this.converter.makeHtml(this.howToUpgradeHtmlEn)
       } else {
-        return "";
+        return ''
       }
     }
   },
   methods: {
-    toggleSideBar() {
-      this.$store.dispatch("ToggleSideBar");
+    toggleSideBar () {
+      this.$store.dispatch('ToggleSideBar')
     },
-    logout() {
-      this.$store.dispatch("user/logout");
-      this.$store.dispatch("delAllViews");
-      this.$router.push("/login");
-      this.$st.sendEv("全局", "登出");
+    logout () {
+      this.$store.dispatch('user/logout')
+      this.$store.dispatch('delAllViews')
+      this.$router.push('/login')
+      this.$st.sendEv('全局', '登出')
     },
-    setLang(lang) {
-      window.localStorage.setItem("lang", lang);
-      this.$i18n.locale = lang;
-      this.$store.commit("lang/SET_LANG", lang);
+    setLang (lang) {
+      window.localStorage.setItem('lang', lang)
+      this.$i18n.locale = lang
+      this.$store.commit('lang/SET_LANG', lang)
 
-      this.$st.sendEv("全局", "切换中英文", lang);
+      this.$st.sendEv('全局', '切换中英文', lang)
     },
-    onClickUpgrade() {
-      this.isLatestReleaseNoteVisible = true;
-      this.$st.sendEv("全局", "点击版本升级");
+    onClickUpgrade () {
+      this.isLatestReleaseNoteVisible = true
+      this.$st.sendEv('全局', '点击版本升级')
     }
   }
-};
+}
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>

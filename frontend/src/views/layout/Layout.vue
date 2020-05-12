@@ -17,12 +17,12 @@
 </template>
 
 <script>
-import { Navbar, Sidebar, AppMain, TagsView } from "./components";
-import ResizeMixin from "./mixin/ResizeHandler";
-import Documentation from "../../components/Documentation/Documentation";
+import { Navbar, Sidebar, AppMain, TagsView } from './components'
+import ResizeMixin from './mixin/ResizeHandler'
+import Documentation from '../../components/Documentation/Documentation'
 
 export default {
-  name: "Layout",
+  name: 'Layout',
   components: {
     Documentation,
     Navbar,
@@ -31,44 +31,44 @@ export default {
     AppMain
   },
   mixins: [ResizeMixin],
-  data() {
+  data () {
     return {
       isShowDocumentation: false
-    };
+    }
   },
   computed: {
-    sidebar() {
-      return this.$store.state.app.sidebar;
+    sidebar () {
+      return this.$store.state.app.sidebar
     },
-    device() {
-      return this.$store.state.app.device;
+    device () {
+      return this.$store.state.app.device
     },
-    classObj() {
+    classObj () {
       return {
         hideSidebar: !this.sidebar.opened,
         openSidebar: this.sidebar.opened,
         withoutAnimation: this.sidebar.withoutAnimation,
-        mobile: this.device === "mobile"
-      };
+        mobile: this.device === 'mobile'
+      }
     }
   },
   methods: {
-    handleClickOutside() {
-      this.$store.dispatch("CloseSideBar", { withoutAnimation: false });
+    handleClickOutside () {
+      this.$store.dispatch('CloseSideBar', { withoutAnimation: false })
     },
-    onClickDocumentation() {
-      this.isShowDocumentation = true;
-      this.$st.sendEv("全局", "打开右侧文档");
+    onClickDocumentation () {
+      this.isShowDocumentation = true
+      this.$st.sendEv('全局', '打开右侧文档')
     },
-    onCloseDocumentation() {
-      this.isShowDocumentation = false;
-      this.$st.sendEv("全局", "关闭右侧文档");
+    onCloseDocumentation () {
+      this.isShowDocumentation = false
+      this.$st.sendEv('全局', '关闭右侧文档')
     }
   },
-  async created() {
-    await this.$store.dispatch("doc/getDocData");
+  async created () {
+    await this.$store.dispatch('doc/getDocData')
   }
-};
+}
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>

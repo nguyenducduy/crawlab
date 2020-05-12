@@ -24,44 +24,44 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
-import variables from "@/styles/variables.scss";
-import SidebarItem from "./SidebarItem";
+import { mapState, mapGetters } from 'vuex'
+import variables from '@/styles/variables.scss'
+import SidebarItem from './SidebarItem'
 
 export default {
   components: { SidebarItem },
   computed: {
-    ...mapState("user", ["adminPaths"]),
-    ...mapGetters(["sidebar"]),
-    routeLevel1() {
-      let pathArray = this.$route.path.split("/");
-      return `/${pathArray[1]}`;
+    ...mapState('user', ['adminPaths']),
+    ...mapGetters(['sidebar']),
+    routeLevel1 () {
+      let pathArray = this.$route.path.split('/')
+      return `/${pathArray[1]}`
     },
-    routes() {
+    routes () {
       return this.$router.options.routes.filter(d => {
-        const role = this.$store.getters["user/userInfo"].role;
-        if (role === "admin") return true;
-        return !this.adminPaths.includes(d.path);
-      });
+        const role = this.$store.getters['user/userInfo'].role
+        if (role === 'admin') return true
+        return !this.adminPaths.includes(d.path)
+      })
     },
-    variables() {
-      return variables;
+    variables () {
+      return variables
     },
-    isCollapse() {
-      return !this.sidebar.opened;
+    isCollapse () {
+      return !this.sidebar.opened
     },
-    version() {
+    version () {
       return (
-        this.$store.state.version.version || window.sessionStorage.getItem("v")
-      );
+        this.$store.state.version.version || window.sessionStorage.getItem('v')
+      )
     }
   },
-  data() {
-    return {};
+  data () {
+    return {}
   },
-  async created() {},
-  mounted() {}
-};
+  async created () {},
+  mounted () {}
+}
 </script>
 
 <style>
